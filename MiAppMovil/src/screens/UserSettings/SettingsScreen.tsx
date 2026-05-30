@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Switch } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import SectionTitle from "../../components/SectionTitle";
@@ -10,7 +10,7 @@ import { navigationRef } from "../../navigation/NavigationService";
 export default function SettingsScreen() {
   const { logout } = useAuth();
   const { changeLanguage, clearLanguage, language } = useLanguage();
-  const { colors } = useTheme();
+  const { colors, theme, toggleTheme, isDark } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -42,6 +42,18 @@ export default function SettingsScreen() {
         </View>
         <CustomButton title="Limpiar idioma" onPress={clearLanguage} variant="tertiary" />
       </View>
+
+    <View style={[styles.section, { backgroundColor: colors.inputBackground }]}>
+      <Text style={[styles.sectionLabel, { color: colors.primary }]}>Apariencia</Text>
+      <Text style={[styles.currentValue, { color: colors.textSecondary }]}>
+        Tema actual: {isDark ? "Oscuro" : "Claro"}
+      </Text>
+      <Switch 
+        value={isDark}
+        onValueChange={toggleTheme}
+        thumbColor={colors.onSecondary}
+      />
+    </View>
 
       <View style={[styles.section, { backgroundColor: colors.inputBackground }]}>
         <Text style={[styles.sectionLabel, { color: colors.primary }]}>

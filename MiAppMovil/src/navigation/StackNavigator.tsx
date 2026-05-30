@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
 import TabNavigator from "./TabsNavigator";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
+import { useTheme } from "../contexts/ThemeContext";
 
 //1. declarar tipado para pantallas y sus parametros
 export type RootStackParamList = {
@@ -15,10 +16,15 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 //3. utilizar el stack 
 export default function StackNavigator() {
+  const {colors} = useTheme();
+  
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: true,
+         headerStyle:{ backgroundColor: colors.headerBackground},
+        headerTintColor: colors.headerText
+       }}
     >
       <Stack.Screen
         name="Login"

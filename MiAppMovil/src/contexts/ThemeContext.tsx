@@ -7,18 +7,24 @@ type ThemeMode = "light" | "dark";
 
 
 const lightColors: ThemeColors = {
-    background: "#ffffff",
-    text: "#f5f5f5",
-    textSecondary: "#666666",
-    primary: "#001f5c",
-    secondary: "#5f0650",
-    inputBackground: "#f0f0f0",
-    buttonPrimaryBg: "#67102d",
-    buttonPrimaryText: "#ffffff",
-    buttonSecondaryBg: "gray",
-    buttonSecondaryText: "#ffffff",
-    buttonTertiaryBg: "#e8e8e8",
-    buttonTertiaryText: "#1a1a1a"
+  background: "#ffffff",
+  text: "#f5f5f5",
+  textSecondary: "#666666",
+  primary: "#001f5c",
+  secondary: "#5f0650",
+  inputBackground: "#f0f0f0",
+  buttonPrimaryBg: "#67102d",
+  buttonPrimaryText: "#ffffff",
+  buttonSecondaryBg: "gray",
+  buttonSecondaryText: "#ffffff",
+  buttonTertiaryBg: "#e8e8e8",
+  buttonTertiaryText: "#1a1a1a",
+  onSecondary: "#ffffff",
+  tabBarBackground: "#ffffff",
+  headerBackground: "#ffffff",
+  headerText: "#001f5c",
+  error: "#d32f2f",
+  border: "#cccccc"
 };
 
 const darkColors: ThemeColors = {
@@ -33,13 +39,20 @@ const darkColors: ThemeColors = {
     buttonSecondaryBg: "#555555",
     buttonSecondaryText: "#e0e0e0",
     buttonTertiaryBg: "#2a2a2a",
-    buttonTertiaryText: "#e0e0e0"
+    buttonTertiaryText: "#e0e0e0",
+    onSecondary: "#ffffff",
+    tabBarBackground: "#1e1e1e",
+    headerBackground: "#1e1e1e",
+    headerText: "#e0e0e0",
+    error: "#f78c8a",
+    border: "#444444"
 };
 
 type ThemeContextType = {
   theme: ThemeMode;
   colors: ThemeColors;
   toggleTheme: () => void;
+  isDark: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -51,9 +64,10 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeMode>("light");
+  const [theme, setTheme] = useState<ThemeMode>("dark");
 
   const colors = theme === "dark" ? darkColors : lightColors;
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const loadTheme = async () => {
@@ -73,7 +87,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, colors, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, colors, toggleTheme, isDark }}>
       {children}
     </ThemeContext.Provider>
   );

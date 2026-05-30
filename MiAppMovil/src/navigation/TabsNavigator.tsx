@@ -5,6 +5,7 @@ import ProductsScreen from "../screens/ProductsScreen";
 import RoutinesScreen from "../screens/RoutinesScreen";
 import ProfileScreen from "../screens/UserSettings/ProfileScreen";
 import SettingsScreen from "../screens/UserSettings/SettingsScreen";
+import { useTheme } from "../contexts/ThemeContext";
 
 //1. declarar tipado para pantallas y sus parametros
 type TabsParamList = {
@@ -22,10 +23,17 @@ const Tab = createBottomTabNavigator<TabsParamList>();
 export type { TabsParamList };
 
 export default function TabNavigator() {
+  const {colors} = useTheme();
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "#5f0650",
+        tabBarStyle: {
+          backgroundColor: colors.tabBarBackground,
+          borderTopColor: colors.tabBarBackground,
+        },
+        headerStyle:{ backgroundColor: colors.headerBackground},
+        headerTintColor: colors.headerText
       }}
     >
       <Tab.Screen
@@ -33,7 +41,7 @@ export default function TabNavigator() {
         component={HomeScreen}
         options={{
           title: "Inicio",
-          headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),

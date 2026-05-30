@@ -11,4 +11,10 @@ export type ThemeColors = {
   buttonSecondaryText: string;
   buttonTertiaryBg: string;
   buttonTertiaryText: string;
+  onSecondary: string;
+  tabBarBackground: string;
+  headerBackground: string;
+  headerText: string;
+  error: string;
+  border: string;
 };
