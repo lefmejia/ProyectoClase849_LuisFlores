@@ -11,4 +11,5 @@ const getEnvVar = (key: string): string => {
 export const env = {
   supabaseUrl: getEnvVar("EXPO_PUBLIC_SUPABASE_URL"),
   supabaseAnonKey: getEnvVar("EXPO_PUBLIC_SUPABASE_ANON_KEY"),
+  webClientId:getEnvVar("EXPO_PUBLIC_WEB_CLIENT_ID"),
 } as const;

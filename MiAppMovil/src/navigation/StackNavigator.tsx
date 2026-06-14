@@ -3,12 +3,14 @@ import LoginScreen from "../screens/LoginScreen";
 import TabNavigator from "./TabsNavigator";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
 import { useTheme } from "../contexts/ThemeContext";
+import RegisterScreen from "../screens/RegisterScreen";
 
 //1. declarar tipado para pantallas y sus parametros
 export type RootStackParamList = {
   Login: undefined;
   MainTabs: undefined;
   ProductDetail: { productId: string };
+  Register: undefined;
 };
 
 //2. crear el stack navigator el cual va a manejar la navegacion
@@ -30,6 +32,11 @@ export default function StackNavigator() {
         name="Login"
         component={LoginScreen}
         options={{ title: "Skincare Tracker" }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ title: "Crear Cuenta" }}
       />
       <Stack.Screen
         name="MainTabs"
