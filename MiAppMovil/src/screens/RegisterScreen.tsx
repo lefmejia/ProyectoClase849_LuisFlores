@@ -47,26 +47,26 @@ const handleIdToken = async (response:any) => {
 }
 
 const handleRegisterWithGoogle = async () => {
-  // try {
-  //         await GoogleSignin.hasPlayServices()
-  //         const response = await GoogleSignin.signIn()
-  //         if (isSuccessResponse(response)) {
-  //           const { data, error } = await handleIdToken(response);
-  //           if (error) {
-  //             Alert.alert("Error al registrarse", error.message);
-  //           } else if (data.user !== null) {
-  //             navigation.navigate("MainTabs");
-  //           }
-  //         }
-  //       } catch (error: any) {
-  //         if (error.code === statusCodes.IN_PROGRESS) {
-  //           console.log("operation (e.g. sign in) is in progress already");
-  //         } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-  //           console.log("play services not available or outdated");
-  //         } else {
-  //           console.log("some other error happened", error);
-  //         }
-  //       }
+  try {
+          await GoogleSignin.hasPlayServices()
+          const response = await GoogleSignin.signIn()
+          if (isSuccessResponse(response)) {
+            const { data, error } = await handleIdToken(response);
+            if (error) {
+              Alert.alert("Error al registrarse", error.message);
+            } else if (data.user !== null) {
+              navigation.navigate("MainTabs");
+            }
+          }
+        } catch (error: any) {
+          if (error.code === statusCodes.IN_PROGRESS) {
+            console.log("operation (e.g. sign in) is in progress already");
+          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            console.log("play services not available or outdated");
+          } else {
+            console.log("some other error happened", error);
+          }
+        }
 }
 
   return (
@@ -105,32 +105,6 @@ const handleRegisterWithGoogle = async () => {
           onPress={handleRegisterWithGoogle}
           variant="secondary"
         />
-        <GoogleSigninButton
-      size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Dark}
-      onPress={async () => {
-        try {
-          await GoogleSignin.hasPlayServices()
-          const response = await GoogleSignin.signIn()
-          if (isSuccessResponse(response)) {
-            const { data, error } = await handleIdToken(response);
-            if (error) {
-              Alert.alert("Error al registrarse", error.message);
-            } else if (data.user !== null) {
-              navigation.navigate("MainTabs");
-            }
-          }
-        } catch (error: any) {
-          if (error.code === statusCodes.IN_PROGRESS) {
-            // operation (e.g. sign in) is in progress already
-          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            // play services not available or outdated
-          } else {
-            // some other error happened
-          }
-        }
-      }}
-    />
       </View>
     </ScreenWrapper>
   );
